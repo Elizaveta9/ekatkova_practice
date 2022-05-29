@@ -12,21 +12,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class CountryService {
-    @Autowired
-    private ModelMapper mapper;
 
     @Autowired
     private CountryRepository countryRepository;
 
+    @Autowired
+    private DtoConvertor dtoConvertor;
+
     public List<ResponseCountry> getCountries() {
         List<CountryEntity> countries = countryRepository.findAll();
-        return toDtoList(countries);
-    }
-
-    private List<ResponseCountry> toDtoList(List<CountryEntity> source) {
-        return source
-                .stream()
-                .map(element -> mapper.map(element, ResponseCountry.class))
-                .collect(Collectors.toList());
+        return dtoConvertor.toDtoList(countries, ResponseCountry.class);
     }
 }
