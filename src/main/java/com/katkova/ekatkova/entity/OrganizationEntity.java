@@ -24,7 +24,4 @@ public class OrganizationEntity {
     private String address;
     private String phone;
     private Boolean isActive;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
-//    private List<OfficeEntity> offices;
 }

@@ -25,17 +25,17 @@ public class UserEntity {
     private String phone;
     private Boolean isIdentified;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "office_id")
     private OfficeEntity office;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "doc_code")
     private DocEntity doc;
     private String docNumber;
     private String docDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "country_code")
     private CountryEntity country;
 }
