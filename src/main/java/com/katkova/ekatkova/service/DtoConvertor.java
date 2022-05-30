@@ -1,7 +1,6 @@
 package com.katkova.ekatkova.service;
 
-import com.katkova.ekatkova.dto.ResponseCountry;
-import com.katkova.ekatkova.entity.CountryEntity;
+import org.modelmapper.MappingException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,5 +18,9 @@ public class DtoConvertor {
                 .stream()
                 .map(element -> mapper.map(element, targetClass))
                 .collect(Collectors.toList());
+    }
+
+    public <S, T> T toEntity(S dto, Class<T> entityClass) {
+        return mapper.map(dto, entityClass);
     }
 }
