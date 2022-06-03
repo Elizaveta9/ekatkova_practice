@@ -22,7 +22,7 @@ public class UserController {
     public ResponseResult registerUser(@RequestBody @Valid RequestUserRegistration user,
                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
-            return new ResponseResult(ResultTypeEnum.ERROR);
+            return new ResponseResult(ResultTypeEnum.PARAMETER_IS_MISSING_OR_EMPTY);
         }
         if (userService.hasSameUserLogin(user.getLogin())){
             return new ResponseResult(ResultTypeEnum.USER_ALREADY_EXIST);
