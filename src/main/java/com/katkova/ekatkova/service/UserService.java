@@ -24,4 +24,9 @@ public class UserService {
         UserEntity user = userRepository.findByLogin(login);
         return user != null;
     }
+
+    public Boolean hasUserByLoginAndPassword(String login, String password){
+        UserEntity user = userRepository.findByLoginAndPassword(login, password);
+        return user != null;
+    }
 }

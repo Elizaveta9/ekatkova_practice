@@ -1,5 +1,6 @@
 package com.katkova.ekatkova.controller;
 
+import com.katkova.ekatkova.dto.RequestLogin;
 import com.katkova.ekatkova.dto.RequestUserRegistration;
 import com.katkova.ekatkova.dto.ResponseResult;
 import com.katkova.ekatkova.service.ResultTypeEnum;
@@ -33,5 +34,14 @@ public class UserController {
     @GetMapping("/activation")
     public void activation(@RequestParam String code){
         System.out.println(code);
+    }
+
+    @PostMapping("/login")
+    public ResponseResult login(@RequestBody RequestLogin requestLogin){
+        if (userService.hasUserByLoginAndPassword(requestLogin.getLogin(), requestLogin.getPassword())){
+            return new ResponseResult(ResultTypeEnum.SUCCESS);
+        } else {
+            return new ResponseResult(ResultTypeEnum.ERROR);
+        }
     }
 }
