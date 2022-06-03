@@ -29,4 +29,9 @@ public class UserController {
         userService.saveUser(user);
         return new ResponseResult(ResultTypeEnum.SUCCESS);
     }
+
+    @GetMapping("/activation")
+    public void activation(@RequestParam String code){
+        System.out.println(code);
+    }
 }
