@@ -15,8 +15,13 @@ public class UserService {
     @Autowired
     private DtoConvertor dtoConvertor;
 
-    public void saveUser(RequestUserRegistration userDto){
+    public void saveUser(RequestUserRegistration userDto) {
         UserEntity userEntity = dtoConvertor.toEntity(userDto, UserEntity.class);
         userRepository.save(userEntity);
+    }
+
+    public Boolean hasSameUserLogin(String login) {
+        UserEntity user = userRepository.findByLogin(login);
+        return user != null;
     }
 }
