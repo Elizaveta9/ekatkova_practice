@@ -19,4 +19,9 @@ public class OrganizationService {
         OrganizationEntity organizationEntity = dtoConvertor.toEntity(organizationDto, OrganizationEntity.class);
         organizationRepository.save(organizationEntity);
     }
+
+    public boolean hasInn(String inn) {
+        OrganizationEntity organizationEntity = organizationRepository.findByInn(inn);
+        return organizationEntity != null;
+    }
 }

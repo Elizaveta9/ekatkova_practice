@@ -10,7 +10,8 @@ public enum ResultTypeEnum {
     ERROR("error"),
     USER_ALREADY_EXIST("error: user already exist"),
 
-    PARAMETER_IS_MISSING_OR_EMPTY("error: some parameters are missing or empty");
+    PARAMETER_IS_MISSING_OR_EMPTY("error: some parameters are missing or empty"),
+    INN_ALREADY_REGISTERED("error: inn is already registered");
 
     private String result;
 }

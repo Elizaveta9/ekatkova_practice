@@ -27,7 +27,12 @@ public class OrganizationController {
         if (bindingResult.hasErrors()) {
             return new ResponseResult(ResultTypeEnum.PARAMETER_IS_MISSING_OR_EMPTY);
         }
+        if (organizationService.hasInn(organization.getInn())){
+            return  new ResponseResult(ResultTypeEnum.INN_ALREADY_REGISTERED);
+        }
         organizationService.save(organization);
         return new ResponseResult(ResultTypeEnum.SUCCESS);
     }
+
+
 }
