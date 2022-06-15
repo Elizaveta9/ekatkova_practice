@@ -1,18 +1,17 @@
 package com.katkova.ekatkova.controller;
 
 import com.katkova.ekatkova.dto.RequestOrganizationSave;
+import com.katkova.ekatkova.dto.ResponseOrganizationFilter;
 import com.katkova.ekatkova.dto.ResponseResult;
 import com.katkova.ekatkova.repository.OrganizationRepository;
 import com.katkova.ekatkova.service.OrganizationService;
 import com.katkova.ekatkova.service.ResultTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/organization")
@@ -34,5 +33,11 @@ public class OrganizationController {
         return new ResponseResult(ResultTypeEnum.SUCCESS);
     }
 
+    @GetMapping("/list")
+    public List<ResponseOrganizationFilter> findOrganizationByFilter(@RequestParam(required = true) String name,
+                                                                     @RequestParam(required = false) String inn,
+                                                                     @RequestParam(required = false) String kpp) {
+        return organizationService.findAllUsingFilter(name, inn, kpp);
+    }
 
 }
