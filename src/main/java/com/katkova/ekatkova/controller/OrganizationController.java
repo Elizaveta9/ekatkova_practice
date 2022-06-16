@@ -1,9 +1,6 @@
 package com.katkova.ekatkova.controller;
 
-import com.katkova.ekatkova.dto.RequestOrganizationSave;
-import com.katkova.ekatkova.dto.ResponseOrganizationFilter;
-import com.katkova.ekatkova.dto.ResponseResult;
-import com.katkova.ekatkova.repository.OrganizationRepository;
+import com.katkova.ekatkova.dto.*;
 import com.katkova.ekatkova.service.OrganizationService;
 import com.katkova.ekatkova.service.ResultTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +35,16 @@ public class OrganizationController {
                                                                      @RequestParam(required = false) String inn,
                                                                      @RequestParam(required = false) String kpp) {
         return organizationService.findAllUsingFilter(name, inn, kpp);
+    }
+
+    @GetMapping("/{id}")
+    public Response findOrganizationById(@PathVariable Long id){
+        ResponseOrganizationId organizationDto = organizationService.findById(id);
+        if (organizationDto == null){
+            return new ResponseResult(ResultTypeEnum.NO_SUCH_ORGANIZATION);
+        } else {
+            return organizationDto;
+        }
     }
 
 }

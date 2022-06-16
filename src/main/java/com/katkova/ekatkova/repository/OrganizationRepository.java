@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OrganizationRepository extends JpaRepository<OrganizationEntity, Long>, JpaSpecificationExecutor<OrganizationEntity> {
     OrganizationEntity findByInn(String inn);
+
+    OrganizationEntity findFirstById(Long id);
 
     static Specification<OrganizationEntity> hasNameLike(String name) {
         return (organization, cq, cb) -> cb.like(organization.get("name"), "%" + name + "%");

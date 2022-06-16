@@ -9,8 +9,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ResponseOrganizationFilter implements Response{
+public class ResponseOrganizationId implements Response {
     private Long id;
     private String name;
+    private String inn;
+    private String kpp;
+    private String address;
+    private String phone;
     private Boolean isActive;
 }

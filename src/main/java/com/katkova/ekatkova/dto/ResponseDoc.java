@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ResponseDoc {
+public class ResponseDoc implements Response {
     private Long code;
     private String name;
 }

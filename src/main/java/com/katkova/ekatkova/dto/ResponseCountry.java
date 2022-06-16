@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ResponseCountry {
+public class ResponseCountry implements Response{
     private Long code;
     private String name;
 }

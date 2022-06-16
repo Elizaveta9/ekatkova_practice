@@ -1,6 +1,5 @@
 package com.katkova.ekatkova.service;
 
-import org.modelmapper.MappingException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,5 +21,9 @@ public class DtoConvertor {
 
     public <S, T> T toEntity(S dto, Class<T> entityClass) {
         return mapper.map(dto, entityClass);
+    }
+
+    public <S, T> T toDto(S entity, Class<T> dtoClass) {
+        return mapper.map(entity, dtoClass);
     }
 }
