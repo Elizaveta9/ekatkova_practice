@@ -47,4 +47,9 @@ public class OrganizationController {
         }
     }
 
+    @PostMapping("/update")
+    public Response updateOrganization(@RequestBody RequestOrganizationUpdate organization){
+        return organizationService.update(organization);
+    }
+
 }

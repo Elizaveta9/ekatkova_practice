@@ -20,13 +20,11 @@ public class UserService {
         userRepository.save(userEntity);
     }
 
-    public Boolean hasSameUserLogin(String login) {
-        UserEntity user = userRepository.findByLogin(login);
-        return user != null;
+    public boolean hasSameUserLogin(String login) {
+        return userRepository.existsByLogin(login);
     }
 
-    public Boolean hasUserByLoginAndPassword(String login, String password){
-        UserEntity user = userRepository.findByLoginAndPassword(login, password);
-        return user != null;
+    public boolean hasUserByLoginAndPassword(String login, String password){
+        return userRepository.existsByLoginAndPassword(login, password);
     }
 }

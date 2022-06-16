@@ -13,6 +13,7 @@ public interface OrganizationRepository extends JpaRepository<OrganizationEntity
     OrganizationEntity findByInn(String inn);
 
     OrganizationEntity findFirstById(Long id);
+    Boolean existsByInn(String inn);
 
     static Specification<OrganizationEntity> hasNameLike(String name) {
         return (organization, cq, cb) -> cb.like(organization.get("name"), "%" + name + "%");
