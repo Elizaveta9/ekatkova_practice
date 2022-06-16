@@ -9,7 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ResponseDoc implements Response {
-    private Long code;
+public class ResponseOrganizationFilter implements Response{
+    private Long id;
     private String name;
+    private Boolean isActive;
 }

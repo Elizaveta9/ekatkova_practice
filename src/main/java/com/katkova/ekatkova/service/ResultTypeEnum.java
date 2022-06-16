@@ -8,7 +8,11 @@ import lombok.Getter;
 public enum ResultTypeEnum {
     SUCCESS("success"),
     ERROR("error"),
-    USER_ALREADY_EXIST("error: user already exist");
+    USER_ALREADY_EXIST("error: user already exist"),
+
+    PARAMETER_IS_MISSING_OR_EMPTY("error: some parameters are missing or empty"),
+    INN_ALREADY_REGISTERED("error: inn is already registered"),
+    NO_SUCH_ORGANIZATION("no such organization");
 
     private String result;
 }
