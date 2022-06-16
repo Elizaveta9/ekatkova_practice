@@ -23,8 +23,8 @@ public class OrganizationController {
         if (bindingResult.hasErrors()) {
             return new ResponseResult(ResultTypeEnum.PARAMETER_IS_MISSING_OR_EMPTY);
         }
-        if (organizationService.hasInn(organization.getInn())){
-            return  new ResponseResult(ResultTypeEnum.INN_ALREADY_REGISTERED);
+        if (organizationService.hasInn(organization.getInn())) {
+            return new ResponseResult(ResultTypeEnum.INN_ALREADY_REGISTERED);
         }
         organizationService.save(organization);
         return new ResponseResult(ResultTypeEnum.SUCCESS);
@@ -38,9 +38,9 @@ public class OrganizationController {
     }
 
     @GetMapping("/{id}")
-    public Response findOrganizationById(@PathVariable Long id){
+    public Response findOrganizationById(@PathVariable Long id) {
         ResponseOrganizationId organizationDto = organizationService.findById(id);
-        if (organizationDto == null){
+        if (organizationDto == null) {
             return new ResponseResult(ResultTypeEnum.NO_SUCH_ORGANIZATION);
         } else {
             return organizationDto;
