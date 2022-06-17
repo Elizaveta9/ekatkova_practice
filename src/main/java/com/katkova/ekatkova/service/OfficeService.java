@@ -1,12 +1,18 @@
 package com.katkova.ekatkova.service;
 
-import com.katkova.ekatkova.dto.RequestOfficeSave;
-import com.katkova.ekatkova.dto.Response;
-import com.katkova.ekatkova.dto.ResponseResult;
+import com.katkova.ekatkova.dto.*;
 import com.katkova.ekatkova.entity.OfficeEntity;
 import com.katkova.ekatkova.repository.OfficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OfficeService {
@@ -24,5 +30,30 @@ public class OfficeService {
             return new ResponseResult(ResultTypeEnum.OFFICE_ALREADY_EXIST);
         }
         return new ResponseResult(ResultTypeEnum.SUCCESS);
+    }
+
+    public List<ResponseOfficeFilter> findAllUsingFilter(Long orgId, String name, String phone, Boolean isActive) {
+        List<OfficeEntity> offices = null;
+        Specification specification = new Specification<OfficeEntity>() {
+            @Override
+            public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicates = new ArrayList<>();
+                if (null != orgId) {
+                    predicates.add(criteriaBuilder.equal(root.get("organization"), orgId));
+                }
+                if (null != name) {
+                    predicates.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
+                }
+                if (null != phone) {
+                    predicates.add(criteriaBuilder.equal(root.get("phone"), phone));
+                }
+                if (null != isActive) {
+                    predicates.add(criteriaBuilder.equal(root.get("isActive"), isActive));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        offices = officeRepository.findAll(specification);
+        return dtoConvertor.toDtoList(offices, ResponseOfficeFilter.class);
     }
 }
