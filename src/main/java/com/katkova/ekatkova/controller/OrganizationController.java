@@ -26,8 +26,8 @@ public class OrganizationController {
         if (organizationService.hasInn(organization.getInn())) {
             return new ResponseResult(ResultTypeEnum.INN_ALREADY_REGISTERED);
         }
-        organizationService.save(organization);
-        return new ResponseResult(ResultTypeEnum.SUCCESS);
+        return organizationService.save(organization);
+
     }
 
     @GetMapping("/list")

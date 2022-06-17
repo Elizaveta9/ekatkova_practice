@@ -11,7 +11,8 @@ public enum ResultTypeEnum {
     USER_ALREADY_EXIST("error: user already exist"),
     PARAMETER_IS_MISSING_OR_EMPTY("error: some parameters are missing or empty"),
     INN_ALREADY_REGISTERED("error: inn is already registered"),
-    NO_SUCH_ORGANIZATION("no such organization");
+    NO_SUCH_ORGANIZATION("no such organization"),
+    OFFICE_ALREADY_EXIST("error: office with that name and phone is already registered");
 
     private String result;
 }

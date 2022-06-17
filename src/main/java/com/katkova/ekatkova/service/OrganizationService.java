@@ -21,9 +21,10 @@ public class OrganizationService {
 
     private OrganizationMapper mapper = Mappers.getMapper(OrganizationMapper.class);
 
-    public void save(RequestOrganizationSave organizationDto) {
+    public ResponseResult save(RequestOrganizationSave organizationDto) {
         OrganizationEntity organizationEntity = dtoConvertor.toEntity(organizationDto, OrganizationEntity.class);
         organizationRepository.save(organizationEntity);
+        return new ResponseResult(ResultTypeEnum.SUCCESS);
     }
 
     public boolean hasInn(String inn) {
