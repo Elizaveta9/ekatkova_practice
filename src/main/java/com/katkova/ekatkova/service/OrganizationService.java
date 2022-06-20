@@ -56,11 +56,6 @@ public class OrganizationService {
         };
         organizations = organizationRepository.findAll(specification);
         return dtoConvertor.toDtoList(organizations, ResponseOrganizationFilter.class);
-//        List<OrganizationEntity> organizationEntities = organizationRepository.findAll(
-//                OrganizationRepository.hasNameLike(name)
-//                        .or(OrganizationRepository.hasInn(inn))
-//                        .or(OrganizationRepository.hasKpp(kpp)));
-//        return dtoConvertor.toDtoList(organizationEntities, ResponseOrganizationFilter.class);
     }
 
     public ResponseOrganizationId findById(Long id) {
