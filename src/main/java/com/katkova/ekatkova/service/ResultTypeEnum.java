@@ -13,8 +13,8 @@ public enum ResultTypeEnum {
     INN_ALREADY_REGISTERED("error: inn is already registered"),
     NO_SUCH_ORGANIZATION("no such organization"),
     OFFICE_ALREADY_EXIST("error: office with that name and phone is already registered"),
-
-    NO_SUCH_OFFICE("no such office"),;
+    NO_SUCH_OFFICE("no such office"),
+    NO_SUCH_USER("no such user");
 
     private String result;
 }

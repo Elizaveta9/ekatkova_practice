@@ -1,7 +1,6 @@
 package com.katkova.ekatkova.service;
 
-import com.katkova.ekatkova.dto.RequestUserRegistration;
-import com.katkova.ekatkova.dto.ResponseUserFilter;
+import com.katkova.ekatkova.dto.*;
 import com.katkova.ekatkova.entity.UserEntity;
 import com.katkova.ekatkova.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +66,13 @@ public class UserService {
         };
         users = userRepository.findAll(specification);
         return dtoConvertor.toDtoList(users, ResponseUserFilter.class);
+    }
+
+    public Response findById(Long id) {
+        if (userRepository.existsById(id)){
+            return dtoConvertor.toDto(userRepository.findFirstById(id), ResponseUserId.class);
+        } else {
+            return new ResponseResult(ResultTypeEnum.NO_SUCH_USER);
+        }
     }
 }

@@ -1,9 +1,6 @@
 package com.katkova.ekatkova.controller;
 
-import com.katkova.ekatkova.dto.RequestLogin;
-import com.katkova.ekatkova.dto.RequestUserRegistration;
-import com.katkova.ekatkova.dto.ResponseResult;
-import com.katkova.ekatkova.dto.ResponseUserFilter;
+import com.katkova.ekatkova.dto.*;
 import com.katkova.ekatkova.service.ResultTypeEnum;
 import com.katkova.ekatkova.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +52,10 @@ public class UserController {
                                                         @RequestParam(required = false) Long docCode,
                                                         @RequestParam(required = false) Long countryCode) {
         return userService.findAllUsingFilter(officeId, firstName, lastName, middleName, docCode, countryCode);
+    }
+
+    @GetMapping("/user/{id}")
+    public Response findUserById(@PathVariable Long id){
+        return userService.findById(id);
     }
 }

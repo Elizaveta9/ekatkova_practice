@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpec
     Boolean existsByLogin(String login);
 
     Boolean existsByLoginAndPassword(String login, String password);
+
+    UserEntity findFirstById(Long id);
 }
