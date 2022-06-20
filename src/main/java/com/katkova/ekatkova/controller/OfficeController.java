@@ -1,6 +1,7 @@
 package com.katkova.ekatkova.controller;
 
 import com.katkova.ekatkova.dto.RequestOfficeSave;
+import com.katkova.ekatkova.dto.RequestOfficeUpdate;
 import com.katkova.ekatkova.dto.Response;
 import com.katkova.ekatkova.dto.ResponseOfficeFilter;
 import com.katkova.ekatkova.service.OfficeService;
@@ -33,5 +34,10 @@ public class OfficeController {
     @GetMapping("/{id}")
     public Response findOfficeById(@PathVariable Long id){
         return officeService.findById(id);
+    }
+
+    @PostMapping("/update")
+    public Response updateOffice(@RequestBody RequestOfficeUpdate office){
+        return officeService.update(office);
     }
 }

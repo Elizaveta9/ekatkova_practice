@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface OfficeRepository extends JpaRepository<OfficeEntity, Long>, JpaSpecificationExecutor<OfficeEntity> {
     boolean existsByNameAndPhone(String name, String phone);
 
+    OfficeEntity findFirstById(Long id);
+
     static Specification<OfficeEntity> hasOrgId(Long orgId){
         return ((office, cq, cb) -> cb.equal(office.get("orgId"), orgId));
     }
