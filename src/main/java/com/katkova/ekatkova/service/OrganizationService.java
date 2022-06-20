@@ -6,8 +6,14 @@ import com.katkova.ekatkova.mapper.OrganizationMapper;
 import com.katkova.ekatkova.repository.OrganizationRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,9 +27,10 @@ public class OrganizationService {
 
     private OrganizationMapper mapper = Mappers.getMapper(OrganizationMapper.class);
 
-    public void save(RequestOrganizationSave organizationDto) {
+    public ResponseResult save(RequestOrganizationSave organizationDto) {
         OrganizationEntity organizationEntity = dtoConvertor.toEntity(organizationDto, OrganizationEntity.class);
         organizationRepository.save(organizationEntity);
+        return new ResponseResult(ResultTypeEnum.SUCCESS);
     }
 
     public boolean hasInn(String inn) {
@@ -31,12 +38,24 @@ public class OrganizationService {
     }
 
     public List<ResponseOrganizationFilter> findAllUsingFilter(String name, String inn, String kpp) {
-        name = name.toUpperCase();
-        List<OrganizationEntity> organizationEntities = organizationRepository.findAll(
-                OrganizationRepository.hasNameLike(name)
-                        .or(OrganizationRepository.hasInn(inn))
-                        .or(OrganizationRepository.hasKpp(kpp)));
-        return dtoConvertor.toDtoList(organizationEntities, ResponseOrganizationFilter.class);
+        String nameUpperCased = name.toUpperCase();
+        List<OrganizationEntity> organizations = null;
+        Specification specification = new Specification() {
+            @Override
+            public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicates = new ArrayList<>();
+                predicates.add(criteriaBuilder.like(root.get("name"), "%" + nameUpperCased + "%"));
+                if (null != inn) {
+                    predicates.add(criteriaBuilder.equal(root.get("inn"), inn));
+                }
+                if (null != kpp) {
+                    predicates.add(criteriaBuilder.equal(root.get("kpp"), kpp));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        organizations = organizationRepository.findAll(specification);
+        return dtoConvertor.toDtoList(organizations, ResponseOrganizationFilter.class);
     }
 
     public ResponseOrganizationId findById(Long id) {
