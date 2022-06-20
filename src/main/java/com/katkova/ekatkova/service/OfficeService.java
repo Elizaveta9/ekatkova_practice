@@ -56,4 +56,12 @@ public class OfficeService {
         offices = officeRepository.findAll(specification);
         return dtoConvertor.toDtoList(offices, ResponseOfficeFilter.class);
     }
+
+    public Response findById(Long id) {
+        if (officeRepository.existsById(id)) {
+            return dtoConvertor.toDto(officeRepository.findById(id), ResponseOfficeId.class);
+        } else {
+            return new ResponseResult(ResultTypeEnum.NO_SUCH_OFFICE);
+        }
+    }
 }
