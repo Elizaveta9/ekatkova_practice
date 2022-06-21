@@ -7,15 +7,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RequestUserUpdate implements Request{
-    private Long id;
+public class RequestUserSave implements Request {
     private String firstName;
-    private String lastName;
+    private String secondName;
     private String middleName;
     private String phone;
-    private String docDate;
     private Long docCode;
     private String docNumber;
+    private String docDate;
     private Long countryCode;
-    private Long officeId;
+    private Boolean isIdentified;
 }

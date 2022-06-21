@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseResult registerUser(@RequestBody @Valid RequestUserRegistration user,
+    public Response registerUser(@RequestBody @Valid RequestUserRegistration user,
                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseResult(ResultTypeEnum.PARAMETER_IS_MISSING_OR_EMPTY);
@@ -26,8 +26,7 @@ public class UserController {
         if (userService.hasSameUserLogin(user.getLogin())) {
             return new ResponseResult(ResultTypeEnum.USER_ALREADY_EXIST);
         }
-        userService.saveUser(user);
-        return new ResponseResult(ResultTypeEnum.SUCCESS);
+        return userService.saveUser(user);
     }
 
     @GetMapping("/activation")
@@ -62,5 +61,10 @@ public class UserController {
     @PostMapping("/user/update")
     public Response updateUser(@RequestBody RequestUserUpdate user){
         return userService.update(user);
+    }
+
+    @PostMapping("/user/save")
+    public Response saveUser(@RequestBody RequestUserSave user){
+        return userService.saveUser(user);
     }
 }

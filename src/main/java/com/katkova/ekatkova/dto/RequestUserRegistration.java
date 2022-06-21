@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RequestUserRegistration {
+public class RequestUserRegistration implements Request{
     @NotNull
     @NotEmpty
     private String login;

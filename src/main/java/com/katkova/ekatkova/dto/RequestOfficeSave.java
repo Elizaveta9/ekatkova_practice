@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RequestOfficeSave {
+public class RequestOfficeSave implements Request{
     private String name;
     private String address;
     private String phone;

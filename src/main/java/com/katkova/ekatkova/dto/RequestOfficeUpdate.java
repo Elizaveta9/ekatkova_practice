@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RequestOfficeUpdate {
+public class RequestOfficeUpdate implements Request{
     private Long id;
     private String name;
     private String address;
