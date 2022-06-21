@@ -58,4 +58,9 @@ public class UserController {
     public Response findUserById(@PathVariable Long id){
         return userService.findById(id);
     }
+
+    @PostMapping("/user/update")
+    public Response updateUser(@RequestBody RequestUserUpdate user){
+        return userService.update(user);
+    }
 }
