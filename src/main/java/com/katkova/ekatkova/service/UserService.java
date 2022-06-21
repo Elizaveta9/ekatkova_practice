@@ -79,7 +79,7 @@ public class UserService {
     public Response update(RequestUserUpdate userUpdatedDto) {
         if (userRepository.existsById(userUpdatedDto.getId())){
             UserEntity userEntity = userRepository.findFirstById(userUpdatedDto.getId());
-            userEntity = dtoConvertor.updateFromDto(userUpdatedDto, userEntity);
+            dtoConvertor.updateFromDto(userUpdatedDto, userEntity);
             userRepository.save(userEntity);
             return new ResponseResult(ResultTypeEnum.SUCCESS);
         } else {
