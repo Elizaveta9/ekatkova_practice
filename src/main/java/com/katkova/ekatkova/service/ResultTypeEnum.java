@@ -14,7 +14,9 @@ public enum ResultTypeEnum {
     NO_SUCH_ORGANIZATION("no such organization"),
     OFFICE_ALREADY_EXIST("error: office with that name and phone is already registered"),
     NO_SUCH_OFFICE("no such office"),
-    NO_SUCH_USER("no such user");
+    NO_SUCH_USER("no such user"),
+    NO_SUCH_DOC("error: doc with given code does not exist"),
+    NO_SUCH_COUNTRY("error: country with given code does not exist");
 
     private String result;
 }

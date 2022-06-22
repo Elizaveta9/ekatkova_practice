@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocRepository extends JpaRepository<DocEntity, Long> {
+    DocEntity findByCode(Long code);
 }

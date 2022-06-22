@@ -1,6 +1,9 @@
 package com.katkova.ekatkova.service;
 
+import com.katkova.ekatkova.dto.RequestUserUpdate;
+import com.katkova.ekatkova.entity.UserEntity;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

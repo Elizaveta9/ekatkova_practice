@@ -1,7 +1,13 @@
 package com.katkova.ekatkova.service;
 
 import com.katkova.ekatkova.dto.*;
+import com.katkova.ekatkova.entity.CountryEntity;
+import com.katkova.ekatkova.entity.DocEntity;
+import com.katkova.ekatkova.entity.OfficeEntity;
 import com.katkova.ekatkova.entity.UserEntity;
+import com.katkova.ekatkova.repository.CountryRepository;
+import com.katkova.ekatkova.repository.DocRepository;
+import com.katkova.ekatkova.repository.OfficeRepository;
 import com.katkova.ekatkova.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,6 +25,15 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DocRepository docRepository;
+
+    @Autowired
+    private CountryRepository countryRepository;
+
+    @Autowired
+    private OfficeRepository officeRepository;
 
     @Autowired
     private DtoConvertor dtoConvertor;
@@ -80,6 +95,34 @@ public class UserService {
     public Response update(RequestUserUpdate userUpdatedDto) {
         if (userRepository.existsById(userUpdatedDto.getId())){
             UserEntity userEntity = userRepository.findFirstById(userUpdatedDto.getId());
+            DocEntity docEntity;
+            CountryEntity countryEntity;
+            OfficeEntity officeEntity;
+
+            if (null == userUpdatedDto.getDocCode()){
+            } else if (!docRepository.existsById(userUpdatedDto.getDocCode())){
+                return new ResponseResult(ResultTypeEnum.NO_SUCH_DOC);
+            } else {
+                docEntity = docRepository.findByCode(userUpdatedDto.getDocCode());
+                userEntity.setDoc(docEntity);
+            }
+
+            if (null == userUpdatedDto.getCountryCode()){
+            } else if (!countryRepository.existsById(userUpdatedDto.getCountryCode())){
+                return new ResponseResult(ResultTypeEnum.NO_SUCH_COUNTRY);
+            } else {
+                countryEntity = countryRepository.findByCode(userUpdatedDto.getCountryCode());
+                userEntity.setCountry(countryEntity);
+            }
+
+            if (null == userUpdatedDto.getOfficeId()){
+            } else if (!officeRepository.existsById(userUpdatedDto.getOfficeId())) {
+                return new ResponseResult(ResultTypeEnum.NO_SUCH_OFFICE);
+            } else {
+                officeEntity = officeRepository.findFirstById(userUpdatedDto.getId());
+                userEntity.setOffice(officeEntity);
+            }
+
             dtoConvertor.updateFromDto(userUpdatedDto, userEntity);
             userRepository.save(userEntity);
             return new ResponseResult(ResultTypeEnum.SUCCESS);
