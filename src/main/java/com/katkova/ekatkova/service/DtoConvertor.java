@@ -1,9 +1,6 @@
 package com.katkova.ekatkova.service;
 
-import com.katkova.ekatkova.dto.RequestUserUpdate;
-import com.katkova.ekatkova.entity.UserEntity;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +27,7 @@ public class DtoConvertor {
         return mapper.map(entity, dtoClass);
     }
 
-    public <S, T> void updateFromDto(S updatedEntity, T needUpdateEntity){
+    public <S, T> void updateFromDto(S updatedEntity, T needUpdateEntity) {
         mapper.map(updatedEntity, needUpdateEntity);
     }
 }

@@ -26,12 +26,13 @@ public class UserController {
         if (userService.hasSameUserLogin(user.getLogin())) {
             return new ResponseResult(ResultTypeEnum.USER_ALREADY_EXIST);
         }
+        userService.createActivationCode(user);
         return userService.saveUser(user);
     }
 
     @GetMapping("/activation")
-    public void activation(@RequestParam String code) {
-        System.out.println(code);
+    public String activation(@RequestParam String code, @RequestParam String login) {
+        return userService.checkActivation(code, login);
     }
 
     @PostMapping("/login")

@@ -24,6 +24,7 @@ public class UserEntity {
     private String middleName;
     private String phone;
     private Boolean isIdentified;
+    private String activationCode;
 
     @ManyToOne
     @JoinColumn(name = "office_id")

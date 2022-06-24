@@ -32,4 +32,6 @@ public class RequestUserRegistration implements Request{
     @NotNull
     @NotEmpty
     private String middleName;
+
+    private String activationCode;
 }

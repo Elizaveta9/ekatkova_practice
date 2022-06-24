@@ -19,6 +19,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserService {
@@ -48,7 +49,7 @@ public class UserService {
         return userRepository.existsByLogin(login);
     }
 
-    public boolean hasUserByLoginAndPassword(String login, String password){
+    public boolean hasUserByLoginAndPassword(String login, String password) {
         return userRepository.existsByLoginAndPassword(login, password);
     }
 
@@ -85,7 +86,7 @@ public class UserService {
     }
 
     public Response findById(Long id) {
-        if (userRepository.existsById(id)){
+        if (userRepository.existsById(id)) {
             return dtoConvertor.toDto(userRepository.findFirstById(id), ResponseUserId.class);
         } else {
             return new ResponseResult(ResultTypeEnum.NO_SUCH_USER);
@@ -93,29 +94,29 @@ public class UserService {
     }
 
     public Response update(RequestUserUpdate userUpdatedDto) {
-        if (userRepository.existsById(userUpdatedDto.getId())){
+        if (userRepository.existsById(userUpdatedDto.getId())) {
             UserEntity userEntity = userRepository.findFirstById(userUpdatedDto.getId());
             DocEntity docEntity;
             CountryEntity countryEntity;
             OfficeEntity officeEntity;
 
-            if (null == userUpdatedDto.getDocCode()){
-            } else if (!docRepository.existsById(userUpdatedDto.getDocCode())){
+            if (null == userUpdatedDto.getDocCode()) {
+            } else if (!docRepository.existsById(userUpdatedDto.getDocCode())) {
                 return new ResponseResult(ResultTypeEnum.NO_SUCH_DOC);
             } else {
                 docEntity = docRepository.findByCode(userUpdatedDto.getDocCode());
                 userEntity.setDoc(docEntity);
             }
 
-            if (null == userUpdatedDto.getCountryCode()){
-            } else if (!countryRepository.existsById(userUpdatedDto.getCountryCode())){
+            if (null == userUpdatedDto.getCountryCode()) {
+            } else if (!countryRepository.existsById(userUpdatedDto.getCountryCode())) {
                 return new ResponseResult(ResultTypeEnum.NO_SUCH_COUNTRY);
             } else {
                 countryEntity = countryRepository.findByCode(userUpdatedDto.getCountryCode());
                 userEntity.setCountry(countryEntity);
             }
 
-            if (null == userUpdatedDto.getOfficeId()){
+            if (null == userUpdatedDto.getOfficeId()) {
             } else if (!officeRepository.existsById(userUpdatedDto.getOfficeId())) {
                 return new ResponseResult(ResultTypeEnum.NO_SUCH_OFFICE);
             } else {
@@ -128,6 +129,34 @@ public class UserService {
             return new ResponseResult(ResultTypeEnum.SUCCESS);
         } else {
             return new ResponseResult(ResultTypeEnum.NO_SUCH_USER);
+        }
+    }
+
+    public RequestUserRegistration createActivationCode(RequestUserRegistration user) {
+        Random random = new Random();
+        int min = 1000;
+        int max = 9999;
+        String code = String.valueOf(random.nextInt(max - min) + min);
+        user.setActivationCode(code);
+        sendCode(code, user);
+        return user;
+    }
+
+    private void sendCode(String code, RequestUserRegistration user) {
+        System.out.println("activation code for user with login " + user.getLogin() + " is " + code);
+    }
+
+    public String checkActivation(String code, String login) {
+        UserEntity user = userRepository.findByLogin(login);
+        if (user == null){
+            return "wrong login";
+        }
+        if (code.equals(user.getActivationCode())) {
+            user.setIsIdentified(true);
+            userRepository.save(user);
+            return "code: " + code + " for user " + user.getFirstName() + " is correct. You're identified now";
+        } else {
+            return "code: " + code + " for user " + user.getFirstName() + " is wrong.";
         }
     }
 }
