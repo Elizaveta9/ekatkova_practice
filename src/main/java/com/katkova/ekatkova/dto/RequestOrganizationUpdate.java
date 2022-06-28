@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RequestOrganizationUpdate {
+public class RequestOrganizationUpdate implements Request{
     private Long id;
     private String name;
     private String inn;

@@ -2,9 +2,7 @@ package com.katkova.ekatkova.service;
 
 import com.katkova.ekatkova.dto.*;
 import com.katkova.ekatkova.entity.OrganizationEntity;
-import com.katkova.ekatkova.mapper.OrganizationMapper;
 import com.katkova.ekatkova.repository.OrganizationRepository;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class OrganizationService {
     @Autowired
     private DtoConvertor dtoConvertor;
 
-    private OrganizationMapper mapper = Mappers.getMapper(OrganizationMapper.class);
+//    private OrganizationMapper mapper = Mappers.getMapper(OrganizationMapper.class);
 
     public ResponseResult save(RequestOrganizationSave organizationDto) {
         OrganizationEntity organizationEntity = dtoConvertor.toEntity(organizationDto, OrganizationEntity.class);
@@ -69,7 +67,7 @@ public class OrganizationService {
     public Response update(RequestOrganizationUpdate organizationUpdatedDto) {
         if (organizationRepository.existsById(organizationUpdatedDto.getId())) {
             OrganizationEntity organizationEntity = organizationRepository.findFirstById(organizationUpdatedDto.getId());
-            mapper.updateOrganizationFromDto(organizationUpdatedDto, organizationEntity);
+            dtoConvertor.updateFromDto(organizationUpdatedDto, organizationEntity);
             organizationRepository.save(organizationEntity);
             return new ResponseResult(ResultTypeEnum.SUCCESS);
         } else {

@@ -2,9 +2,7 @@ package com.katkova.ekatkova.service;
 
 import com.katkova.ekatkova.dto.*;
 import com.katkova.ekatkova.entity.OfficeEntity;
-import com.katkova.ekatkova.mapper.OfficeMapper;
 import com.katkova.ekatkova.repository.OfficeRepository;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -23,8 +21,6 @@ public class OfficeService {
 
     @Autowired
     private DtoConvertor dtoConvertor;
-
-    private OfficeMapper mapper = Mappers.getMapper(OfficeMapper.class);
 
     public Response save(RequestOfficeSave officeDto) {
         OfficeEntity officeEntity = dtoConvertor.toEntity(officeDto, OfficeEntity.class);
@@ -70,9 +66,9 @@ public class OfficeService {
     }
 
     public Response update(RequestOfficeUpdate officeUpdatedDto) {
-        if (officeRepository.existsById(officeUpdatedDto.getId())){
+        if (officeRepository.existsById(officeUpdatedDto.getId())) {
             OfficeEntity officeEntity = officeRepository.findFirstById(officeUpdatedDto.getId());
-            mapper.updateOfficeFromDto(officeUpdatedDto, officeEntity);
+            dtoConvertor.updateFromDto(officeUpdatedDto, officeEntity);
             officeRepository.save(officeEntity);
             return new ResponseResult(ResultTypeEnum.SUCCESS);
         } else {

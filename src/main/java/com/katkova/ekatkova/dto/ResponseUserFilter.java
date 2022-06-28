@@ -7,10 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RequestOfficeUpdate implements Request{
+public class ResponseUserFilter implements Response{
     private Long id;
-    private String name;
-    private String address;
-    private String phone;
-    private Boolean isActive;
+    private String firstName;
+    private String lastName;
+    private String middleName;
 }

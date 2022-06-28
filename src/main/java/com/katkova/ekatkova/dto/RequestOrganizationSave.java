@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RequestOrganizationSave {
+public class RequestOrganizationSave implements Request{
     @NotNull
     @NotEmpty
     private String name;

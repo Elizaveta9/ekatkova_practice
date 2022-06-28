@@ -26,4 +26,8 @@ public class DtoConvertor {
     public <S, T> T toDto(S entity, Class<T> dtoClass) {
         return mapper.map(entity, dtoClass);
     }
+
+    public <S, T> void updateFromDto(S updatedEntity, T needUpdateEntity) {
+        mapper.map(updatedEntity, needUpdateEntity);
+    }
 }
