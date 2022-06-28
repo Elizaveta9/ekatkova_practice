@@ -58,21 +58,27 @@
 
 *	api/user/list – получение списка пользователей;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269779-c387c963-9296-4c35-9b8c-7b464c318517.png)
 
 *	api/user/{id} – получение отдельного пользователя;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176270096-88721e62-fd14-409a-b093-b9dd93e69b2f.png)
 
 *	api/user/update  – обновление данных пользователя;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176270199-550a2ef7-0144-4882-af55-0adc4bc833dc.png)
 
 *	api/user/save  – добавление нового пользователя;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176270433-eb1698a8-e739-4d8a-b9b8-1f10dc81ae64.png)
 
 *	api/docs – справочник по существующим видом документов, удостоверяющих личность физического лица;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176270485-9b9f2e52-e2f4-417e-94df-7a270e4ea0af.png)
 
-*	api/countries – справочник по странам и их кодов.
+*	api/countries – справочник по странам и их кодам.
 
+    ![image](https://user-images.githubusercontent.com/77570081/176270570-1279915b-9322-471c-b59b-aa475d139d73.png)
 
 
 ## Support
