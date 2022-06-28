@@ -30,24 +30,31 @@
 
 *	api/organization/{id} – получение отдельной организации;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176268948-3de89920-d113-410d-bb1a-a31a566d2904.png)
 
 *	api/organization/update – обновление данных организации;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269012-217c99b9-7da1-45c2-801f-dc9bf4699340.png)
 
 *	api/organization/save – добавленные новой организации;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269067-ad3a5628-d994-4fc0-adb5-de1418a535d6.png)
 
 *	api/office/list – получение списка офисов;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269226-0d0229a2-e0aa-463c-9b44-e589476c8ab6.png)
 
 *	api/office/{id} – получение отдельного офиса;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269300-36abacbd-7ac0-44cd-bfcc-66fe80a69b63.png)
 
 *	api/office/update – обновление данных об офисе;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269469-51da392f-4e13-4379-ae22-1cb3446700c3.png)
 
 *	api/office/save – добавление нового офиса;
 
+    ![image](https://user-images.githubusercontent.com/77570081/176269559-ac3e3aff-d006-4ade-a8ee-06f8274af307.png)
 
 *	api/user/list – получение списка пользователей;
 
