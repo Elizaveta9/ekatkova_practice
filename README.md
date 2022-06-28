@@ -13,22 +13,60 @@
 
 Доступные http-запросы:
 *	api/register – регистрация пользователя;
+
+    ![image](https://user-images.githubusercontent.com/77570081/176268102-583cd4ca-de4f-4491-b9f1-b365206f2cdf.png)
+
 *	api/activation?code=… – активация кода;
+
+    ![image](https://user-images.githubusercontent.com/77570081/176268267-fd41ff27-a8b2-450b-9feb-b404e3a4f242.png)
+
 *	api/login – авторизация пользователя;
+    
+    ![image](https://user-images.githubusercontent.com/77570081/176268420-153a625a-fe70-4c79-9f4c-ca102e6e52df.png) 
+
 *	api/organization/list – получение списка организаций;
+
+    ![image](https://user-images.githubusercontent.com/77570081/176268512-74e8ef51-479a-4de9-88bf-74df1c7a0d2d.png)
+
 *	api/organization/{id} – получение отдельной организации;
+
+
 *	api/organization/update – обновление данных организации;
+
+
 *	api/organization/save – добавленные новой организации;
+
+
 *	api/office/list – получение списка офисов;
+
+
 *	api/office/{id} – получение отдельного офиса;
+
+
 *	api/office/update – обновление данных об офисе;
+
+
 *	api/office/save – добавление нового офиса;
+
+
 *	api/user/list – получение списка пользователей;
+
+
 *	api/user/{id} – получение отдельного пользователя;
+
+
 *	api/user/update  – обновление данных пользователя;
+
+
 *	api/user/save  – добавление нового пользователя;
+
+
 *	api/docs – справочник по существующим видом документов, удостоверяющих личность физического лица;
+
+
 *	api/countries – справочник по странам и их кодов.
+
+
 
 ## Support
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
